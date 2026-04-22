@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富盛理財 | 您身邊的理財好夥伴</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --cream-mid: #f5ede0;
+    --cream-dark: #ede0cc;
+    --orange: #e8722a;
+    --orange-light: #f0894a;
+    --orange-pale: #fdeede;
+    --orange-dark: #c45e1e;
+    --brown: #5c3d1e;
+    --brown-mid: #7a5230;
+    --brown-light: #a07850;
+    --white: #ffffff;
+    --gray-bg: #faf7f3;
+    --gray-light: #ede8e0;
+    --gray-text: #8a7968;
+    --text-dark: #2d1f0e;
+    --green: #2e7d4f;
+    --red: #c0392b;
+    --border: #e8ddd0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans TC', sans-serif; color: var(--text-dark); background: var(--cream); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    background: var(--white);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(92,61,30,0.08);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: var(--orange);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; font-weight: 700; color: var(--white);
+    font-family: 'Noto Serif TC', serif;
+    box-shadow: 0 3px 10px rgba(232,114,42,0.35);
+  }
+  .logo-text .brand { font-size: 19px; font-weight: 700; color: var(--brown); letter-spacing: 1px; }
+  .logo-text .sub { font-size: 11px; color: var(--gray-text); letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    color: var(--brown-mid); font-size: 14px;
+    padding: 8px 16px; border-radius: 8px;
+    transition: all 0.2s; font-weight: 400;
+  }
+  .nav-links a:hover { background: var(--orange-pale); color: var(--orange-dark); }
+  .nav-btn {
+    background: var(--orange) !important;
+    color: var(--white) !important;
+    font-weight: 500 !important;
+    border-radius: 20px !important;
+    padding: 8px 22px !important;
+    box-shadow: 0 3px 10px rgba(232,114,42,0.3) !important;
+  }
+  .nav-btn:hover { background: var(--orange-dark) !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: 0.3s; }
+  .mobile-menu {
+    display: none; position: absolute;
+    top: 68px; left: 0; right: 0;
+    background: var(--white); padding: 12px 5%;
+    flex-direction: column; gap: 4px; z-index: 999;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 20px rgba(92,61,30,0.1);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--brown-mid); padding: 12px 16px;
+    border-radius: 8px; font-size: 15px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .mobile-menu a:hover { background: var(--orange-pale); }
+
+  /* ===== TICKER ===== */
+  .ticker-bar {
+    background: var(--brown);
+    color: var(--white);
+    height: 36px; overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .ticker-label {
+    background: var(--orange);
+    color: var(--white); font-size: 11px;
+    font-weight: 700; padding: 0 14px;
+    height: 100%; display: flex; align-items: center;
+    white-space: nowrap; letter-spacing: 1px; flex-shrink: 0;
+  }
+  .ticker-track-wrapper { overflow: hidden; flex: 1; }
+  .ticker-track {
+    display: flex; white-space: nowrap;
+    animation: ticker-scroll 32s linear infinite;
+  }
+  @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 24px; font-size: 12px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+  }
+  .ticker-name { color: rgba(255,255,255,0.65); font-size: 11px; }
+  .ticker-val { font-weight: 500; }
+  .ticker-chg { font-size: 11px; padding: 1px 6px; border-radius: 3px; }
+  .up { color: #6ee7a0; }
+  .down { color: #fca5a5; }
+  .up-bg { background: rgba(110,231,160,0.15); color: #6ee7a0; }
+  .down-bg { background: rgba(252,165,165,0.15); color: #fca5a5; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--cream);
+    padding: 72px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: radial-gradient(ellipse at 80% 50%, rgba(232,114,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: rgba(232,114,42,0.05);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--orange-pale); color: var(--orange-dark);
+    font-size: 12px; padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 20px; font-weight: 500;
+  }
+  .hero-tag::before { content: '✦'; font-size: 10px; }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(26px, 3.5vw, 42px);
+    color: var(--brown); line-height: 1.45;
+    margin-bottom: 16px; font-weight: 600;
+  }
+  .hero h1 em { color: var(--orange); font-style: normal; }
+  .hero p { color: var(--gray-text); font-size: 15px; line-height: 1.9; margin-bottom: 36px; max-width: 440px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: var(--white);
+    padding: 13px 32px; border-radius: 24px;
+    font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.5px;
+    box-shadow: 0 4px 14px rgba(232,114,42,0.35);
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,114,42,0.4); }
+  .btn-outline {
+    background: transparent; color: var(--brown-mid);
+    padding: 13px 32px; border-radius: 24px;
+    font-size: 14px; font-weight: 400;
+    border: 1.5px solid var(--border);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-pale); }
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .hero-card {
+    background: var(--white); border-radius: 16px;
+    padding: 20px 24px; border: 1px solid var(--border);
+    box-shadow: 0 4px 16px rgba(92,61,30,0.08);
+  }
+  .hero-card-label { font-size: 12px; color: var(--gray-text); margin-bottom: 6px; }
+  .hero-card-val { font-size: 22px; font-weight: 700; color: var(--brown); }
+  .hero-card-sub { font-size: 12px; color: var(--green); margin-top: 4px; }
+  .hero-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hero-stat {
+    background: var(--orange-pale); border-radius: 12px;
+    padding: 16px; text-align: center;
+  }
+  .hero-stat-num { font-size: 20px; font-weight: 700; color: var(--orange-dark); }
+  .hero-stat-label { font-size: 11px; color: var(--brown-light); margin-top: 2px; }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding: 64px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-header { margin-bottom: 36px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--orange); font-size: 12px;
+    font-weight: 600; margin-bottom: 8px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .section-tag::before { content: '—'; opacity: 0.5; }
+  .section-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    color: var(--brown); margin-bottom: 8px; font-weight: 600;
+  }
+  .section-header p { color: var(--gray-text); font-size: 14px; line-height: 1.8; }
+
+  /* ===== FUND TABLE ===== */
+  #funds { background: var(--gray-bg); }
+  .fund-grid {
+    border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; background: var(--white);
+    box-shadow: 0 2px 12px rgba(92,61,30,0.06);
+  }
+  .fund-header-row {
+    display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+    background: var(--brown); color: var(--white);
+    padding: 13px 20px; font-size: 12px; font-weight: 500; letter-spacing: 0.5px;
+  }
+  .fund-row {
+    display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+    padding: 16px 20px; align-items: center;
+    border-bottom: 1px solid var(--gray-light);
+    transition: background 0.15s; font-size: 13px;
+  }
+  .fund-row:last-child { border-bottom: none; }
+  .fund-row:hover { background: var(--cream); }
+  .fund-name { font-weight: 500; color: var(--brown); font-size: 13px; line-height: 1.4; }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .badge-domestic { background: #fdeede; color: var(--orange-dark); }
+  .badge-foreign { background: #e8f5ee; color: #1e6b40; }
+  .nav-val { font-weight: 700; font-size: 14px; color: var(--brown); }
+  .change-up { color: var(--green); font-weight: 500; }
+  .change-down { color: var(--red); font-weight: 500; }
+  .change-flat { color: var(--gray-text); }
+  .fund-date { color: var(--gray-text); font-size: 12px; }
+  .fund-detail-btn {
+    display: inline-block; padding: 4px 12px;
+    border: 1px solid var(--border); border-radius: 10px;
+    color: var(--brown-light); font-size: 11px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .fund-detail-btn:hover { background: var(--orange); color: white; border-color: var(--orange); }
+  .fund-note { font-size: 11px; color: var(--gray-text); margin-top: 12px; text-align: right; }
+  .fund-cards { display: none; flex-direction: column; gap: 12px; }
+  .fund-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px;
+    box-shadow: 0 2px 8px rgba(92,61,30,0.06);
+  }
+  .fund-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .fund-card-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .fund-stat { text-align: center; padding: 8px; background: var(--gray-bg); border-radius: 8px; }
+  .fund-stat-label { font-size: 10px; color: var(--gray-text); margin-bottom: 2px; }
+  .fund-stat-val { font-size: 13px; font-weight: 600; color: var(--brown); }
+
+  /* ===== SLIDESHOW ===== */
+  #cases { background: var(--white); }
+  .slides-track { display: flex; gap: 20px; overflow: hidden; }
+  .slide {
+    min-width: calc(33.33% - 14px); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; background: var(--white);
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .slide:hover { box-shadow: 0 8px 28px rgba(92,61,30,0.12); transform: translateY(-2px); }
+  .slide-img {
+    width: 100%; height: 190px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--brown-light); font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .slide-img.placeholder { background: linear-gradient(135deg, var(--cream-mid) 0%, var(--cream-dark) 100%); }
+  .slide-img img { width: 100%; height: 100%; object-fit: cover; }
+  .slide-body { padding: 20px; }
+  .slide-profile { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .slide-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; flex-shrink: 0;
+    background: var(--orange-pale); color: var(--orange-dark);
+  }
+  .slide-name { font-weight: 600; font-size: 14px; color: var(--brown); }
+  .slide-meta { font-size: 12px; color: var(--gray-text); }
+  .slide-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .slide-tag { background: var(--orange-pale); color: var(--orange-dark); font-size: 11px; padding: 3px 10px; border-radius: 10px; }
+  .slide-feedback {
+    font-size: 13px; color: var(--gray-text); line-height: 1.8;
+    border-left: 3px solid var(--orange-light);
+    padding-left: 12px; font-style: italic;
+  }
+  .slide-return { margin-top: 14px; background: #f0fdf4; border-radius: 10px; padding: 10px 14px; }
+  .slide-return-label { font-size: 11px; color: var(--green); font-weight: 500; }
+  .slide-return-val { font-size: 20px; font-weight: 700; color: var(--green); }
+  .slideshow-controls { display: flex; justify-content: center; gap: 10px; margin-top: 24px; align-items: center; }
+  .slide-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gray-light); cursor: pointer; transition: all 0.2s; border: none;
+  }
+  .slide-dot.active { background: var(--orange); width: 20px; border-radius: 4px; }
+  .slide-arrow {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--white); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; font-size: 16px; color: var(--brown);
+  }
+  .slide-arrow:hover { background: var(--orange); color: white; border-color: var(--orange); }
+  .upload-area {
+    border: 2px dashed var(--border); border-radius: 14px;
+    padding: 32px; text-align: center; margin-top: 24px;
+    cursor: pointer; transition: all 0.2s; background: var(--gray-bg);
+  }
+  .upload-area:hover { border-color: var(--orange); background: var(--orange-pale); }
+  .upload-icon { font-size: 30px; margin-bottom: 8px; }
+  .upload-text { font-size: 13px; color: var(--gray-text); }
+  .upload-btn-label {
+    display: inline-block; margin-top: 10px;
+    padding: 8px 22px; background: var(--orange);
+    color: white; border-radius: 20px; font-size: 13px; cursor: pointer;
+  }
+
+  /* ===== DIAGNOSIS FORM ===== */
+  #diagnosis { background: var(--cream-mid); }
+  .form-card {
+    background: var(--white); border-radius: 20px;
+    padding: 44px; box-shadow: 0 8px 32px rgba(92,61,30,0.1);
+    border: 1px solid var(--border);
+  }
+  .form-intro { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-light); }
+  .form-intro h3 { font-size: 16px; font-weight: 600; color: var(--brown); margin-bottom: 6px; }
+  .form-intro p { font-size: 13px; color: var(--gray-text); line-height: 1.7; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 13px; font-weight: 500; color: var(--brown-mid); display: flex; align-items: center; gap: 4px; }
+  .form-group label .req { color: var(--orange); }
+  .form-group input, .form-group select, .form-group textarea {
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 11px 14px; font-size: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text-dark); background: var(--cream);
+    transition: all 0.2s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--orange); background: var(--white);
+    box-shadow: 0 0 0 3px rgba(232,114,42,0.1);
+  }
+  .form-group input::placeholder { color: #c0b0a0; }
+  .input-prefix-wrap { position: relative; }
+  .input-prefix { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-text); font-size: 13px; }
+  .input-prefix-wrap input { padding-left: 28px; }
+  .form-section-title {
+    grid-column: 1 / -1; font-size: 12px; font-weight: 700;
+    color: var(--orange); letter-spacing: 1.5px; text-transform: uppercase;
+    padding-bottom: 8px; border-bottom: 1px solid var(--cream-dark);
+    margin-bottom: -4px; display: flex; align-items: center; gap: 8px;
+  }
+  .form-section-title::before { content: '●'; font-size: 8px; }
+  .form-footer { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+  .form-consent { display: flex; align-items: flex-start; gap: 10px; }
+  .form-consent input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--orange); }
+  .form-consent label { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+  .form-consent label a { color: var(--orange); }
+  .submit-btn {
+    background: var(--orange); color: var(--white);
+    border: none; border-radius: 24px;
+    padding: 14px 44px; font-size: 15px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600; cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.2s; align-self: flex-start;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 16px rgba(232,114,42,0.35);
+  }
+  .submit-btn:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,114,42,0.4); }
+  .form-notice {
+    grid-column: 1 / -1;
+    background: var(--orange-pale); border-left: 3px solid var(--orange);
+    border-radius: 0 10px 10px 0; padding: 12px 16px;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .form-notice-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .form-notice p { font-size: 12px; color: var(--orange-dark); line-height: 1.7; }
+
+  /* ===== FEATURES STRIP ===== */
+  .features { background: var(--orange); padding: 48px 5%; }
+  .features-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .feature { text-align: center; color: var(--white); }
+  .feature-icon { font-size: 32px; margin-bottom: 10px; }
+  .feature-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .feature-desc { font-size: 12px; opacity: 0.8; line-height: 1.6; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(92,61,30,0.4); z-index: 2000;
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 20px;
+    padding: 44px; max-width: 460px; width: 100%;
+    text-align: center; animation: modal-in 0.3s ease;
+  }
+  @keyframes modal-in { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-icon { font-size: 52px; margin-bottom: 16px; }
+  .modal h3 { font-size: 20px; font-weight: 700; color: var(--brown); margin-bottom: 10px; }
+  .modal p { font-size: 14px; color: var(--gray-text); line-height: 1.8; margin-bottom: 24px; }
+  .modal-close {
+    background: var(--orange); color: white; border: none;
+    border-radius: 20px; padding: 12px 36px; font-size: 14px;
+    cursor: pointer; font-family: 'Noto Sans TC', sans-serif;
+    box-shadow: 0 4px 14px rgba(232,114,42,0.3);
+  }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--brown); color: rgba(255,255,255,0.65); padding: 48px 5% 24px; font-size: 13px; }
+  .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+  .footer-brand .brand-name { color: var(--white); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .footer-brand p { font-size: 12px; line-height: 1.8; }
+  .footer-col h4 { color: var(--white); font-size: 13px; margin-bottom: 14px; font-weight: 600; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.55); font-size: 12px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--orange-light); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 11px; }
+  .footer-warning { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 14px 18px; font-size: 11px; line-height: 1.8; color: rgba(255,255,255,0.4); margin-bottom: 20px; max-width: 1200px; margin: 0 auto 28px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .features-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .fund-header-row, .fund-row { grid-template-columns: 2fr 1fr 1fr; }
+    .fund-header-row .col-date, .fund-row .col-date,
+    .fund-header-row .col-action, .fund-row .col-action { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .fund-grid { display: none; }
+    .fund-cards { display: flex; }
+    .slides-track .slide { min-width: 100%; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-card { padding: 24px 20px; }
+    section { padding: 44px 4%; }
+  }
+  @media (max-width: 640px) {
+    .features-inner { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero { padding: 44px 4% 52px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">富</div>
+    <div class="logo-text">
+      <div class="brand">富盛理財</div>
+      <div class="sub">您身邊的理財好夥伴</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#funds">基金淨值</a>
+    <a href="#cases">成功案例</a>
+    <a href="#diagnosis">財務健診</a>
+    <a href="#diagnosis" class="nav-btn">免費諮詢</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#funds" onclick="toggleMenu()">基金淨值</a>
+  <a href="#cases" onclick="toggleMenu()">成功案例</a>
+  <a href="#diagnosis" onclick="toggleMenu()">財務健診</a>
+  <a href="#diagnosis" onclick="toggleMenu()" style="color: var(--orange); font-weight: 500;">免費諮詢 →</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-label">即時行情</div>
+  <div class="ticker-track-wrapper">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">專業 · 親切 · 值得信賴</div>
+      <h1>讓理財變得<br><em>簡單而溫暖</em></h1>
+      <p>我們相信每一個家庭都值得擁有專屬的財務規劃。從基金投資到退休準備，我們陪您走每一步。</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('diagnosis').scrollIntoView({behavior:'smooth'})">立即免費健診</button>
+        <button class="btn-outline" onclick="document.getElementById('funds').scrollIntoView({behavior:'smooth'})">查看基金淨值</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-label">今日精選基金表現</div>
+        <div class="hero-card-val">安聯台灣科技基金</div>
+        <div class="hero-card-sub">▲ 持續成長中</div>
+      </div>
+      <div class="hero-cards-row">
+        <div class="hero-stat">
+          <div class="hero-stat-num">8+</div>
+          <div class="hero-stat-label">精選基金</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">每日</div>
+          <div class="hero-stat-label">自動更新淨值</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">免費</div>
+          <div class="hero-stat-label">財務健診</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">LINE</div>
+          <div class="hero-stat-label">即時回覆</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features">
+  <div class="features-inner">
+    <div class="feature">
+      <div class="feature-icon">🤝</div>
+      <div class="feature-title">一對一專屬服務</div>
+      <div class="feature-desc">了解您的需求，提供量身打造的規劃建議</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">每日即時淨值</div>
+      <div class="feature-desc">自動從 MoneyDJ 抓取，掌握最新投資動態</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">LINE 快速回覆</div>
+      <div class="feature-desc">填表即推播，顧問 1 個工作日內主動聯繫</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">安心透明</div>
+      <div class="feature-desc">資訊公開透明，讓您投資每一步都有依據</div>
+    </div>
+  </div>
+</div>
+
+<!-- FUND NAV SECTION -->
+<section id="funds">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Fund Net Value</div>
+      <h2>精選基金淨值</h2>
+      <p>每日自動更新，即時掌握您的投資動態</p>
+    </div>
+    <div class="fund-grid" id="fundTable">
+      <div class="fund-header-row">
+        <div>基金名稱</div>
+        <div>類型</div>
+        <div>最新淨值</div>
+        <div>日報酬率</div>
+        <div class="col-date">淨值日期</div>
+        <div class="col-action"></div>
+      </div>
+    </div>
+    <div class="fund-cards" id="fundCards"></div>
+    <p class="fund-note">※ 淨值資料僅供參考，實際數據以基金公司公告為準。投資人申購前應詳閱公開說明書。</p>
+  </div>
+</section>
+
+<!-- CASES SLIDESHOW -->
+<section id="cases">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Success Stories</div>
+      <h2>客戶成功案例</h2>
+      <p>真實夥伴分享，見證每個家庭的財富成長故事</p>
+    </div>
+    <div class="slides-track" id="slidesTrack"></div>
+    <div class="slideshow-controls" id="slideControls"></div>
+    <div class="upload-area" onclick="document.getElementById('imgUpload').click()">
+      <div class="upload-icon">📷</div>
+      <div class="upload-text">新增客戶案例圖片</div>
+      <div class="upload-btn-label">選擇圖片上傳</div>
+      <input type="file" id="imgUpload" accept="image/*" multiple style="display:none" onchange="handleImageUpload(event)">
+    </div>
+  </div>
+</section>
+
+<!-- FINANCIAL DIAGNOSIS -->
+<section id="diagnosis">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Financial Checkup</div>
+      <h2>免費財務健診</h2>
+      <p>填寫以下資料，我們將透過 LINE 與您聯繫，提供專屬財務規劃建議</p>
+    </div>
+    <div class="form-card">
+      <div class="form-intro">
+        <h3>👋 歡迎預約免費諮詢</h3>
+        <p>只需要幾分鐘填寫基本財務狀況，我們的顧問會仔細閱讀您的資料，在 1 個工作日內透過 LINE 主動聯繫您，完全不收任何費用。</p>
+      </div>
+      <form id="diagnosisForm" onsubmit="submitForm(event)">
+        <div class="form-grid">
+          <div class="form-section-title">基本資料</div>
+          <div class="form-group">
+            <label>姓名 <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="請輸入您的姓名" required>
+          </div>
+          <div class="form-group">
+            <label>年齡 <span class="req">*</span></label>
+            <input type="number" name="age" placeholder="例：35" min="18" max="99" required>
+          </div>
+          <div class="form-group">
+            <label>LINE ID <span class="req">*</span></label>
+            <input type="text" name="line_id" placeholder="請輸入您的 LINE ID" required>
+          </div>
+          <div class="form-group">
+            <label>手機號碼</label>
+            <input type="tel" name="phone" placeholder="09XX-XXX-XXX">
+          </div>
+          <div class="form-group">
+            <label>職業</label>
+            <select name="job">
+              <option value="">請選擇職業類別</option>
+              <option>上班族</option><option>自營商/創業者</option>
+              <option>公務員/教師</option><option>自由業</option>
+              <option>退休人士</option><option>其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>婚姻狀況</label>
+            <select name="marital">
+              <option value="">請選擇</option>
+              <option>未婚</option><option>已婚（無子女）</option>
+              <option>已婚（有子女）</option><option>離婚/單親</option>
+            </select>
+          </div>
+
+          <div class="form-section-title">收入與支出</div>
+          <div class="form-group">
+            <label>年收入（萬元）<span class="req">*</span></label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="annual_income" placeholder="例：80" min="0" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>年支出（萬元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="annual_expense" placeholder="例：50" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>目前存款（萬元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="savings" placeholder="例：100" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>投資資產（萬元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="investment" placeholder="例：200" min="0">
+            </div>
+          </div>
+
+          <div class="form-section-title">負債狀況</div>
+          <div class="form-group">
+            <label>房貸月付金額（元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="mortgage_monthly" placeholder="例：25000" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>房貸剩餘期數（月）</label>
+            <input type="number" name="mortgage_months" placeholder="例：240" min="0">
+          </div>
+          <div class="form-group">
+            <label>信貸月付金額（元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="loan_monthly" placeholder="例：5000" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>信貸剩餘期數（月）</label>
+            <input type="number" name="loan_months" placeholder="例：24" min="0">
+          </div>
+          <div class="form-group">
+            <label>其他負債總額（萬元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="other_debt" placeholder="例：10" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>信用卡月均消費（元）</label>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">$</span>
+              <input type="number" name="credit_card" placeholder="例：15000" min="0">
+            </div>
+          </div>
+
+          <div class="form-section-title">財務目標</div>
+          <div class="form-group">
+            <label>主要規劃目標</label>
+            <select name="goal">
+              <option value="">請選擇主要目標</option>
+              <option>退休規劃</option><option>子女教育金</option>
+              <option>購屋置產</option><option>財富傳承</option>
+              <option>穩定現金流</option><option>資產增值</option>
+              <option>風險分散</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>目標年限</label>
+            <select name="timeline">
+              <option value="">請選擇</option>
+              <option>1-3年（短期）</option><option>3-5年（中期）</option>
+              <option>5-10年（長期）</option><option>10年以上</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>其他補充說明</label>
+            <textarea name="notes" rows="3" placeholder="請描述您目前的財務困擾或特殊需求，我們會更有針對性地為您規劃..."></textarea>
+          </div>
+
+          <div class="form-notice">
+            <span class="form-notice-icon">💬</span>
+            <p>填寫完成後，系統將透過 <strong>LINE</strong> 即時通知顧問您的財務健診需求。我們將在 <strong>1個工作日內</strong>主動聯繫您，進行一對一免費諮詢，完全沒有任何壓力。</p>
+          </div>
+
+          <div class="form-footer">
+            <div class="form-consent">
+              <input type="checkbox" id="consent" required>
+              <label for="consent">我同意將本表單資料提供給富盛理財作為諮詢使用，並了解此資料僅用於提供財務建議服務。<a href="#">隱私權政策</a></label>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>💬</span> 送出並透過 LINE 通知顧問
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-warning">
+    ⚠ 重要聲明：基金投資有一定風險，過去績效不代表未來報酬。本網站所提供資料僅供參考，不構成任何投資建議。投資人申購前應詳閱基金公開說明書，並評估自身風險承受能力後再行決策。
+  </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-name">富盛理財</div>
+      <p>您身邊最值得信賴的理財好夥伴，以真誠服務陪伴每個家庭實現財務目標。</p>
+    </div>
+    <div class="footer-col">
+      <h4>服務項目</h4>
+      <ul>
+        <li><a href="#">基金投資</a></li>
+        <li><a href="#">退休規劃</a></li>
+        <li><a href="#">財富傳承</a></li>
+        <li><a href="#">保險規劃</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>了解更多</h4>
+      <ul>
+        <li><a href="#">關於我們</a></li>
+        <li><a href="#">市場分析</a></li>
+        <li><a href="#">理財知識</a></li>
+        <li><a href="#">聯絡我們</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>聯絡方式</h4>
+      <ul>
+        <li><a href="#">LINE 官方帳號</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">電話諮詢</a></li>
+        <li><a href="#">預約門診</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 富盛理財. All rights reserved.</span>
+    <span>隱私權政策 | 免責聲明</span>
+  </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h3>已成功送出！</h3>
+    <p>您的財務健診需求已透過 LINE 通知顧問，我們將在 <strong>1個工作日內</strong>聯繫您安排免費諮詢。<br><br>期待與您一起規劃美好的財務未來！</p>
+    <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('open')">好的，期待聯繫 😊</button>
+  </div>
+</div>
+
+<script>
+// ===== TICKER =====
+const tickerData = [
+  { name: '台灣加權指數', val: '22,456.35', pct: '+0.55%', up: true },
+  { name: '道瓊工業指數', val: '39,872.44', pct: '+0.59%', up: true },
+  { name: 'S&P 500', val: '5,218.63', pct: '-0.29%', up: false },
+  { name: '那斯達克', val: '16,344.87', pct: '+0.55%', up: true },
+  { name: 'USD/TWD', val: '31.85', pct: '-0.38%', up: false },
+  { name: 'EUR/TWD', val: '34.22', pct: '+0.15%', up: true },
+  { name: '黃金(oz)', val: 'USD 2,334', pct: '+0.53%', up: true },
+  { name: '布蘭特原油', val: 'USD 87.55', pct: '-1.00%', up: false },
+];
+function buildTicker() {
+  const track = document.getElementById('tickerTrack');
+  const doubled = [...tickerData, ...tickerData];
+  track.innerHTML = doubled.map(t => `
+    <span class="ticker-item">
+      <span class="ticker-name">${t.name}</span>
+      <span class="ticker-val">${t.val}</span>
+      <span class="ticker-chg ${t.up ? 'up-bg' : 'down-bg'}">${t.up ? '▲' : '▼'} ${t.pct}</span>
+    </span>
+  `).join('');
+}
+
+// ===== FUNDS FROM GOOGLE SHEETS =====
+const API_URL = "https://script.google.com/macros/s/AKfycbyWoYzFopw-ICYPp3r6Pa3fgM77REi59jUNkG_Yihv8a92w8Xrgvj8Dpj2v5a16_R1s2g/exec";
+
+async function loadFundsFromSheet() {
+  const table = document.getElementById('fundTable');
+  const cards = document.getElementById('fundCards');
+  table.innerHTML += `<div style="padding:28px;text-align:center;color:var(--gray-text);font-size:14px;">⏳ 載入基金資料中...</div>`;
+  try {
+    const res = await fetch(API_URL);
+    const funds = await res.json();
+    const header = table.querySelector('.fund-header-row');
+    table.innerHTML = '';
+    if (header) table.appendChild(header);
+    cards.innerHTML = '';
+    funds.forEach(f => {
+      const nav  = parseFloat(f.nav)  || 0;
+      const prev = parseFloat(f.prev) || 0;
+      const diff = prev > 0 ? nav - prev : 0;
+      const pct  = prev > 0 ? ((diff / prev) * 100).toFixed(2) : '0.00';
+      const up   = diff > 0;
+      const flat = diff === 0 || prev === 0;
+      const cls   = flat ? 'change-flat' : up ? 'change-up' : 'change-down';
+      const arrow = flat ? '—' : up ? '▲' : '▼';
+      const badgeCls  = (f.type === '國內' || f.type === '境內') ? 'badge-domestic' : 'badge-foreign';
+      const typeLabel = (f.type === '國內') ? '境內' : f.type;
+      const date = f.date ? String(f.date).split('T')[0] : '—';
+
+      const row = document.createElement('div');
+      row.className = 'fund-row';
+      row.innerHTML = `
+        <div><div class="fund-name">${f.name}</div></div>
+        <div><span class="badge ${badgeCls}">${typeLabel}</span></div>
+        <div class="nav-val">${nav.toFixed(2)}</div>
+        <div class="${cls}">${arrow} ${pct}%</div>
+        <div class="fund-date col-date">${date}</div>
+        <div class="col-action"><span class="fund-detail-btn">詳情</span></div>
+      `;
+      table.appendChild(row);
+
+      const card = document.createElement('div');
+      card.className = 'fund-card';
+      card.innerHTML = `
+        <div class="fund-card-header">
+          <div>
+            <div class="fund-name">${f.name}</div>
+            <div style="margin-top:4px"><span class="badge ${badgeCls}">${typeLabel}</span> <span style="font-size:11px;color:var(--gray-text)">· ${date}</span></div>
+          </div>
+          <span class="fund-detail-btn">詳情</span>
+        </div>
+        <div class="fund-card-stats">
+          <div class="fund-stat"><div class="fund-stat-label">最新淨值</div><div class="fund-stat-val">${nav.toFixed(2)}</div></div>
+          <div class="fund-stat"><div class="fund-stat-label">漲跌幅</div><div class="fund-stat-val ${cls}">${arrow} ${pct}%</div></div>
+          <div class="fund-stat"><div class="fund-stat-label">漲跌額</div><div class="fund-stat-val ${cls}">${diff.toFixed(2)}</div></div>
+        </div>
+      `;
+      cards.appendChild(card);
+    });
+  } catch (err) {
+    table.innerHTML += `<div style="padding:24px;text-align:center;color:var(--red);font-size:14px;">⚠️ 無法載入基金資料</div>`;
+  }
+}
+
+// ===== SLIDESHOW =====
+const cases = [
+  { avatar: '陳', name: '陳先生 · 45歲', bg: '科技業主管', tags: ['退休規劃', '基金投資', '海外資產'], feedback: '在顧問的建議下，重新配置了我的退休金，不到三年資產增長超過預期，非常感謝！', return: '+38.2%', period: '3年累積報酬' },
+  { avatar: '林', name: '林小姐 · 38歲', bg: '醫師 / 自行開業', tags: ['子女教育金', '保險規劃', '現金流'], feedback: '第一次接觸基金投資，顧問很有耐心地解說，幫我規劃了子女的教育基金，很有安全感。', return: '+22.5%', period: '2年累積報酬' },
+  { avatar: '王', name: '王夫婦 · 55歲', bg: '退休 / 傳產家族企業', tags: ['財富傳承', '稅務規劃', '配息'], feedback: '協助我們處理複雜的傳承問題，規劃得非常周全，讓我們對未來充滿信心。', return: '+15.8%', period: '年均報酬率' },
+  { avatar: '黃', name: '黃先生 · 32歲', bg: '軟體工程師', tags: ['資產增值', '定期定額', '科技基金'], feedback: '從每月小額定投開始，顧問幫我找到適合的科技型基金，現在已累積到一筆可觀的資產。', return: '+61.3%', period: '5年累積報酬' },
+];
+let currentSlide = 0;
+function buildSlideshow() {
+  const track = document.getElementById('slidesTrack');
+  const controls = document.getElementById('slideControls');
+  cases.forEach((c, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `
+      <div class="slide-img placeholder">客戶成功案例 ${i + 1}</div>
+      <div class="slide-body">
+        <div class="slide-profile">
+          <div class="slide-avatar">${c.avatar}</div>
+          <div><div class="slide-name">${c.name}</div><div class="slide-meta">${c.bg}</div></div>
+        </div>
+        <div class="slide-tags">${c.tags.map(t => `<span class="slide-tag">${t}</span>`).join('')}</div>
+        <p class="slide-feedback">${c.feedback}</p>
+        <div class="slide-return">
+          <div class="slide-return-label">📈 ${c.period}</div>
+          <div class="slide-return-val">${c.return}</div>
+        </div>
+      </div>
+    `;
+    track.appendChild(slide);
+  });
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'slide-arrow'; prevBtn.innerHTML = '‹';
+  prevBtn.onclick = () => goSlide(-1);
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'slide-arrow'; nextBtn.innerHTML = '›';
+  nextBtn.onclick = () => goSlide(1);
+  controls.appendChild(prevBtn);
+  cases.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    controls.appendChild(dot);
+  });
+  controls.appendChild(nextBtn);
+  setInterval(() => goSlide(1), 5000);
+}
+function goSlide(dir) { currentSlide = (currentSlide + dir + cases.length) % cases.length; updateSlide(); }
+function goToSlide(i) { currentSlide = i; updateSlide(); }
+function updateSlide() {
+  const track = document.getElementById('slidesTrack');
+  const dots = document.querySelectorAll('.slide-dot');
+  const isMobile = window.innerWidth <= 768;
+  const slideW = track.children[0]?.offsetWidth || 0;
+  track.style.transform = `translateX(-${currentSlide * (slideW + 20)}px)`;
+  track.style.transition = 'transform 0.4s ease';
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+
+function handleImageUpload(e) {
+  const files = e.target.files;
+  if (!files.length) return;
+  const track = document.getElementById('slidesTrack');
+  Array.from(files).forEach((file, idx) => {
+    const url = URL.createObjectURL(file);
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `
+      <div class="slide-img"><img src="${url}" alt="案例圖片"></div>
+      <div class="slide-body">
+        <div class="slide-profile">
+          <div class="slide-avatar">客</div>
+          <div><div class="slide-name">新案例 ${idx + 1}</div><div class="slide-meta">待填入客戶資料</div></div>
+        </div>
+        <div class="slide-tags"><span class="slide-tag">新增案例</span></div>
+        <p class="slide-feedback">請聯繫管理員填入案例詳情...</p>
+      </div>
+    `;
+    track.appendChild(slide);
+  });
+}
+
+// ===== FORM =====
+function submitForm(e) {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  const obj = Object.fromEntries(data);
+  console.log('表單資料:', obj);
+  document.getElementById('successModal').classList.add('open');
+  e.target.reset();
+}
+
+// ===== NAV =====
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  const nav = document.querySelector('nav');
+  if (!nav.contains(e.target)) menu.classList.remove('open');
+});
+
+// ===== INIT =====
+buildTicker();
+loadFundsFromSheet();
+buildSlideshow();
+</script>
+</body>
+</html>
