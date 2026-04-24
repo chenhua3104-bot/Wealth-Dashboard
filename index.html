@@ -832,16 +832,40 @@ const tickerData = [
   { name: '黃金(oz)', val: 'USD 2,334', pct: '+0.53%', up: true },
   { name: '布蘭特原油', val: 'USD 87.55', pct: '-1.00%', up: false },
 ];
-function buildTicker() {
+async function buildTicker() {
   const track = document.getElementById('tickerTrack');
-  const doubled = [...tickerData, ...tickerData];
-  track.innerHTML = doubled.map(t => `
-    <span class="ticker-item">
-      <span class="ticker-name">${t.name}</span>
-      <span class="ticker-val">${t.val}</span>
-      <span class="ticker-chg ${t.up ? 'up-bg' : 'down-bg'}">${t.up ? '▲' : '▼'} ${t.pct}</span>
-    </span>
-  `).join('');
+  track.innerHTML = '<span class="ticker-item"><span class="ticker-name">載入中...</span></span>';
+
+  try {
+    const res = await fetch(API_URL + '?type=market');
+    const markets = await res.json();
+
+    const doubled = [...markets, ...markets];
+    track.innerHTML = doubled.map(t => `
+      <span class="ticker-item">
+        <span class="ticker-name">${t.name}</span>
+        <span class="ticker-val">${t.price}</span>
+        <span class="ticker-chg ${t.up ? 'up-bg' : 'down-bg'}">${t.up ? '▲' : '▼'} ${t.change}</span>
+      </span>
+    `).join('');
+
+  } catch(err) {
+    // 抓取失敗時顯示靜態備用數據
+    const fallback = [
+      { name: '台灣加權指數', price: '--', change: '--%', up: true },
+      { name: '道瓊工業指數', price: '--', change: '--%', up: true },
+      { name: 'S&P 500', price: '--', change: '--%', up: true },
+      { name: '那斯達克', price: '--', change: '--%', up: true },
+      { name: 'USD/TWD', price: '--', change: '--%', up: true },
+    ];
+    const doubled = [...fallback, ...fallback];
+    track.innerHTML = doubled.map(t => `
+      <span class="ticker-item">
+        <span class="ticker-name">${t.name}</span>
+        <span class="ticker-val">${t.price}</span>
+      </span>
+    `).join('');
+  }
 }
 
 // ===== FUNDS FROM GOOGLE SHEETS =====
