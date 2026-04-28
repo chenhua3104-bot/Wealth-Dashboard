@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>晨航理財 | 會員登入</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@sbclient/sbclient-js@2"></script>
 <style>
   :root {
     --cream: #fdf8f2;
@@ -287,9 +287,9 @@
 </main>
 
 <script>
-  const SUPABASE_URL = 'https://wzosbwbpqqkiysyfcvzn.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5';
-const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const SBCLIENT_URL = 'https://wzosbwbpqqkiysyfcvzn.supabase.co';
+  const SBCLIENT_KEY = 'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5';
+const sbClient = window.sbclient.createClient(SBCLIENT_URL, SBCLIENT_KEY);
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t, i) => {
       t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
@@ -323,11 +323,11 @@ const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     hideAlert('loginAlert');
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await sbclient.auth.signInWithPassword({ email, password });
       if (error) throw error;
 
       // 取得用戶資料
-      const { data: profile } = await supabase
+      const { data: profile } = await sbclient
         .from('Prof')
         .select('*')
         .eq('id', data.user.id)
@@ -397,11 +397,11 @@ const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     try {
       // 建立帳號
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await sbclient.auth.signUp({ email, password });
       if (error) throw error;
 
       // 寫入申請資料
-      const { error: profileError } = await supabase
+      const { error: profileError } = await sbclient
         .from('Prof')
         .insert({
           id: data.user.id,
@@ -446,9 +446,9 @@ const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   });
 
   // 檢查是否已登入
-  supabase.auth.getSession().then(async ({ data: { session } }) => {
+  sbclient.auth.getSession().then(async ({ data: { session } }) => {
     if (session) {
-      const { data: profile } = await supabase
+      const { data: profile } = await sbclient
         .from('Prof')
         .select('role, status')
         .eq('id', session.user.id)
