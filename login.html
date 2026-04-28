@@ -289,7 +289,8 @@
 <script>
   const SBCLIENT_URL = 'https://wzosbwbpqqkiysyfcvzn.supabase.co';
   const SBCLIENT_KEY = 'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5';
-const sbClient = window.sbclient.createClient(SBCLIENT_URL, SBCLIENT_KEY);
+const { createClient } = supabase;
+const sbClient = createClient(SBCLIENT_URL, SBCLIENT_KEY);
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t, i) => {
       t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
