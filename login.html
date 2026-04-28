@@ -289,8 +289,7 @@
 <script>
   const SUPABASE_URL = 'https://wzosbwbpqqkiysyfcvzn.supabase.co';
   const SUPABASE_KEY = 'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t, i) => {
       t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
