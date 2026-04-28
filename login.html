@@ -5,200 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>晨航理財 | 會員登入</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@sbclient/sbclient-js@2"></script>
 <style>
   :root {
-    --cream: #fdf8f2;
-    --orange: #e8722a;
-    --orange-light: #f0894a;
-    --orange-pale: #fdeede;
-    --orange-dark: #c45e1e;
-    --brown: #5c3d1e;
-    --brown-mid: #7a5230;
-    --brown-light: #a07850;
-    --white: #ffffff;
-    --gray-light: #ede8e0;
-    --gray-text: #8a7968;
-    --text-dark: #2d1f0e;
-    --border: #e8ddd0;
-    --green: #2e7d4f;
-    --red: #c0392b;
+    --cream: #fdf8f2; --orange: #e8722a; --orange-pale: #fdeede;
+    --orange-dark: #c45e1e; --brown: #5c3d1e; --brown-mid: #7a5230;
+    --white: #ffffff; --gray-light: #ede8e0; --gray-text: #8a7968;
+    --text-dark: #2d1f0e; --border: #e8ddd0; --green: #2e7d4f; --red: #c0392b;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--cream);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ===== NAVBAR ===== */
-  nav {
-    background: var(--white);
-    padding: 0 5%;
-    display: flex;
-    align-items: center;
-    height: 64px;
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 2px 12px rgba(92,61,30,0.06);
-  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); min-height: 100vh; display: flex; flex-direction: column; }
+  nav { background: var(--white); padding: 0 5%; display: flex; align-items: center; height: 64px; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(92,61,30,0.06); }
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: var(--orange); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px; font-weight: 700; color: var(--white);
-    font-family: 'Noto Serif TC', serif;
-  }
+  .logo-icon { width: 36px; height: 36px; background: var(--orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; color: var(--white); font-family: 'Noto Serif TC', serif; }
   .logo-text .brand { font-size: 17px; font-weight: 700; color: var(--brown); }
   .logo-text .sub { font-size: 10px; color: var(--gray-text); }
-
-  /* ===== MAIN ===== */
-  main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-  }
-  .login-container {
-    width: 100%;
-    max-width: 440px;
-  }
-  .login-header { text-align: center; margin-bottom: 32px; }
-  .login-header h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 26px; font-weight: 600;
-    color: var(--brown); margin-bottom: 8px;
-  }
-  .login-header p { font-size: 14px; color: var(--gray-text); line-height: 1.7; }
-
-  /* ===== TABS ===== */
-  .tabs {
-    display: flex;
-    background: var(--gray-light);
-    border-radius: 12px;
-    padding: 4px;
-    margin-bottom: 28px;
-  }
-  .tab {
-    flex: 1; padding: 10px;
-    text-align: center; font-size: 14px;
-    font-weight: 500; color: var(--gray-text);
-    border-radius: 9px; cursor: pointer;
-    transition: all 0.2s; border: none;
-    background: transparent; font-family: 'Noto Sans TC', sans-serif;
-  }
-  .tab.active {
-    background: var(--white);
-    color: var(--brown);
-    box-shadow: 0 2px 8px rgba(92,61,30,0.1);
-  }
-
-  /* ===== CARD ===== */
-  .card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 36px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 24px rgba(92,61,30,0.08);
-  }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+  .container { width: 100%; max-width: 440px; }
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 { font-family: 'Noto Serif TC', serif; font-size: 26px; font-weight: 600; color: var(--brown); margin-bottom: 8px; }
+  .header p { font-size: 14px; color: var(--gray-text); line-height: 1.7; }
+  .tabs { display: flex; background: var(--gray-light); border-radius: 12px; padding: 4px; margin-bottom: 28px; }
+  .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 500; color: var(--gray-text); border-radius: 9px; cursor: pointer; transition: all 0.2s; border: none; background: transparent; font-family: 'Noto Sans TC', sans-serif; }
+  .tab.active { background: var(--white); color: var(--brown); box-shadow: 0 2px 8px rgba(92,61,30,0.1); }
+  .card { background: var(--white); border-radius: 20px; padding: 36px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(92,61,30,0.08); }
   .form-group { margin-bottom: 20px; }
-  .form-group label {
-    display: block; font-size: 13px;
-    font-weight: 500; color: var(--brown-mid);
-    margin-bottom: 6px;
-  }
-  .form-group input, .form-group select {
-    width: 100%; padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px; font-size: 14px;
-    font-family: 'Noto Sans TC', sans-serif;
-    color: var(--text-dark); background: var(--cream);
-    transition: all 0.2s; outline: none;
-  }
-  .form-group input:focus, .form-group select:focus {
-    border-color: var(--orange);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(232,114,42,0.1);
-  }
+  .form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--brown-mid); margin-bottom: 6px; }
+  .form-group input, .form-group select { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-family: 'Noto Sans TC', sans-serif; color: var(--text-dark); background: var(--cream); transition: all 0.2s; outline: none; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--orange); background: var(--white); box-shadow: 0 0 0 3px rgba(232,114,42,0.1); }
   .form-group input::placeholder { color: #c0b0a0; }
-  .btn {
-    width: 100%; padding: 13px;
-    border-radius: 12px; font-size: 15px;
-    font-weight: 600; cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif;
-    transition: all 0.2s; border: none;
-    letter-spacing: 0.5px;
-  }
-  .btn-primary {
-    background: var(--orange); color: var(--white);
-    box-shadow: 0 4px 14px rgba(232,114,42,0.3);
-  }
+  .btn { width: 100%; padding: 13px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; transition: all 0.2s; border: none; letter-spacing: 0.5px; }
+  .btn-primary { background: var(--orange); color: var(--white); box-shadow: 0 4px 14px rgba(232,114,42,0.3); }
   .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
   .btn-primary:disabled { background: #d4b896; cursor: not-allowed; transform: none; box-shadow: none; }
-
-  /* ===== ALERT ===== */
-  .alert {
-    padding: 12px 16px; border-radius: 10px;
-    font-size: 13px; margin-bottom: 20px;
-    display: none; line-height: 1.6;
-  }
+  .alert { padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 20px; display: none; line-height: 1.6; }
   .alert.error { background: #fef2f2; color: var(--red); border: 1px solid #fecaca; }
   .alert.success { background: #f0fdf4; color: var(--green); border: 1px solid #bbf7d0; }
   .alert.show { display: block; }
-
-  /* ===== DIVIDER ===== */
-  .divider {
-    text-align: center; margin: 24px 0;
-    position: relative; color: var(--gray-text); font-size: 13px;
-  }
-  .divider::before, .divider::after {
-    content: ''; position: absolute;
-    top: 50%; width: 42%; height: 1px; background: var(--border);
-  }
-  .divider::before { left: 0; }
-  .divider::after { right: 0; }
-
-  /* ===== REGISTER FORM ===== */
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* ===== PENDING ===== */
-  .pending-box {
-    text-align: center; padding: 20px;
-    background: var(--orange-pale);
-    border-radius: 12px; margin-bottom: 20px;
-  }
-  .pending-icon { font-size: 36px; margin-bottom: 8px; }
-  .pending-title { font-size: 15px; font-weight: 600; color: var(--brown); margin-bottom: 6px; }
-  .pending-desc { font-size: 13px; color: var(--gray-text); line-height: 1.7; }
-
-  /* ===== BACK LINK ===== */
-  .back-link {
-    text-align: center; margin-top: 20px;
-    font-size: 13px; color: var(--gray-text);
-  }
+  .divider { text-align: center; margin: 24px 0; position: relative; color: var(--gray-text); font-size: 13px; }
+  .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: var(--border); }
+  .divider::before { left: 0; } .divider::after { right: 0; }
+  .panel { display: none; } .panel.active { display: block; }
+  .notice { margin-top: 16px; padding: 12px; background: var(--orange-pale); border-radius: 10px; font-size: 12px; color: var(--orange-dark); line-height: 1.7; }
+  .back-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--gray-text); }
   .back-link a { color: var(--orange); text-decoration: none; font-weight: 500; }
-
-  /* ===== LOADING ===== */
-  .spinner {
-    display: inline-block; width: 16px; height: 16px;
-    border: 2px solid rgba(255,255,255,0.4);
-    border-top-color: white; border-radius: 50%;
-    animation: spin 0.7s linear infinite; margin-right: 6px;
-    vertical-align: middle;
-  }
+  .link-btn { background: none; border: none; color: var(--orange); font-weight: 500; cursor: pointer; font-size: inherit; font-family: inherit; padding: 0; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 6px; vertical-align: middle; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 480px) {
-    .card { padding: 24px 20px; }
-  }
+  .success-box { text-align: center; padding: 24px 16px; }
+  .success-box .icon { font-size: 48px; margin-bottom: 12px; }
+  .success-box h3 { font-size: 18px; font-weight: 600; color: var(--brown); margin-bottom: 8px; }
+  .success-box p { font-size: 13px; color: var(--gray-text); line-height: 1.8; }
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="logo">
     <div class="logo-icon">晨</div>
@@ -208,20 +67,16 @@
     </div>
   </a>
 </nav>
-
 <main>
-  <div class="login-container">
-    <div class="login-header">
+  <div class="container">
+    <div class="header">
       <h1>歡迎回來 👋</h1>
       <p>請登入您的專屬帳號<br>或申請加入我們的會員服務</p>
     </div>
-
     <div class="tabs">
-      <button class="tab active" onclick="switchTab('login')">會員登入</button>
-      <button class="tab" onclick="switchTab('register')">申請加入</button>
+      <button class="tab active" id="tabLogin" onclick="switchTab('login')">會員登入</button>
+      <button class="tab" id="tabRegister" onclick="switchTab('register')">申請加入</button>
     </div>
-
-    <!-- 登入面板 -->
     <div class="panel active" id="loginPanel">
       <div class="card">
         <div class="alert" id="loginAlert"></div>
@@ -233,19 +88,15 @@
           <label>密碼</label>
           <input type="password" id="loginPassword" placeholder="請輸入密碼">
         </div>
-        <button class="btn btn-primary" onclick="handleLogin()" id="loginBtn">
-          登入
-        </button>
+        <button class="btn btn-primary" onclick="handleLogin()" id="loginBtn">登入</button>
         <div class="divider">或</div>
-        <div style="text-align:center; font-size:13px; color:var(--gray-text);">
-          還沒有帳號？<a href="#" onclick="switchTab('register')" style="color:var(--orange);font-weight:500;text-decoration:none;">立即申請加入</a>
+        <div style="text-align:center;font-size:13px;color:var(--gray-text)">
+          還沒有帳號？<button class="link-btn" onclick="switchTab('register')">立即申請加入</button>
         </div>
       </div>
     </div>
-
-    <!-- 申請面板 -->
     <div class="panel" id="registerPanel">
-      <div class="card">
+      <div class="card" id="registerCard">
         <div class="alert" id="registerAlert"></div>
         <div class="form-group">
           <label>申請身份</label>
@@ -271,195 +122,107 @@
           <label>設定密碼</label>
           <input type="password" id="registerPassword" placeholder="至少 8 個字元">
         </div>
-        <button class="btn btn-primary" onclick="handleRegister()" id="registerBtn">
-          送出申請
-        </button>
-        <div style="margin-top:16px; padding:12px; background:var(--orange-pale); border-radius:10px; font-size:12px; color:var(--orange-dark); line-height:1.7;">
-          📋 申請送出後，我們將在 <strong>1-2個工作日</strong>內審核並通知您，審核通過後即可使用專屬服務。
-        </div>
+        <button class="btn btn-primary" onclick="handleRegister()" id="registerBtn">送出申請</button>
+        <div class="notice">📋 申請送出後，我們將在 <strong>1-2個工作日</strong>內審核並通知您，審核通過後即可使用專屬服務。</div>
       </div>
     </div>
-
-    <div class="back-link">
-      <a href="index.html">← 返回晨航理財首頁</a>
-    </div>
+    <div class="back-link"><a href="index.html">← 返回晨航理財首頁</a></div>
   </div>
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
 <script>
-  const SBCLIENT_URL = 'https://wzosbwbpqqkiysyfcvzn.supabase.co';
-  const SBCLIENT_KEY = 'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5';
-const { createClient } = supabase;
-const sbClient = createClient(SBCLIENT_URL, SBCLIENT_KEY);
-  function switchTab(tab) {
-    document.querySelectorAll('.tab').forEach((t, i) => {
-      t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
+var sb = null;
+
+window.addEventListener('load', function() {
+  sb = window.supabase.createClient(
+    'https://wzosbwbpqqkiysyfcvzn.supabase.co',
+    'sb_publishable__l277U_C3xiOMe1wEwAaxw_X6nUpSb5'
+  );
+  sb.auth.getSession().then(function(res) {
+    if (!res.data.session) return;
+    sb.from('Prof').select('role,status').eq('id', res.data.session.user.id).single().then(function(r) {
+      if (r.data && r.data.status === 'approved') {
+        window.location.href = r.data.role === 'vip' ? 'vip.html' : 'partner.html';
+      }
     });
-    document.getElementById('loginPanel').classList.toggle('active', tab === 'login');
-    document.getElementById('registerPanel').classList.toggle('active', tab === 'register');
-  }
-
-  function showAlert(id, msg, type) {
-    const el = document.getElementById(id);
-    el.textContent = msg;
-    el.className = `alert ${type} show`;
-  }
-
-  function hideAlert(id) {
-    document.getElementById(id).className = 'alert';
-  }
-
-  async function handleLogin() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const btn = document.getElementById('loginBtn');
-
-    if (!email || !password) {
-      showAlert('loginAlert', '請填寫電子信箱和密碼', 'error');
-      return;
-    }
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>登入中...';
-    hideAlert('loginAlert');
-
-    try {
-      const { data, error } = await sbclient.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-
-      // 取得用戶資料
-      const { data: profile } = await sbclient
-        .from('Prof')
-        .select('*')
-        .eq('id', data.user.id)
-        .single();
-
-      if (!profile) {
-        showAlert('loginAlert', '找不到您的會員資料，請聯繫管理員', 'error');
-        btn.disabled = false;
-        btn.textContent = '登入';
-        return;
-      }
-
-      if (profile.status === 'pending') {
-        showAlert('loginAlert', '⏳ 您的申請正在審核中，請耐心等候', 'error');
-        btn.disabled = false;
-        btn.textContent = '登入';
-        return;
-      }
-
-      if (profile.status === 'rejected') {
-        showAlert('loginAlert', '❌ 您的申請未通過審核，請聯繫我們', 'error');
-        btn.disabled = false;
-        btn.textContent = '登入';
-        return;
-      }
-
-      // 審核通過，依身份跳轉
-      showAlert('loginAlert', '✅ 登入成功！正在跳轉...', 'success');
-      setTimeout(() => {
-        if (profile.role === 'vip') {
-          window.location.href = 'vip.html';
-        } else if (profile.role === 'partner') {
-          window.location.href = 'partner.html';
-        }
-      }, 1000);
-
-    } catch (err) {
-      let msg = '登入失敗，請確認帳號密碼是否正確';
-      if (err.message?.includes('Invalid login')) msg = '電子信箱或密碼錯誤，請重試';
-      if (err.message?.includes('Email not confirmed')) msg = '請先確認您的電子信箱';
-      showAlert('loginAlert', msg, 'error');
-      btn.disabled = false;
-      btn.textContent = '登入';
-    }
-  }
-
-  async function handleRegister() {
-    const role = document.getElementById('registerRole').value;
-    const name = document.getElementById('registerName').value.trim();
-    const email = document.getElementById('registerEmail').value.trim();
-    const phone = document.getElementById('registerPhone').value.trim();
-    const password = document.getElementById('registerPassword').value;
-    const btn = document.getElementById('registerBtn');
-
-    if (!role || !name || !email || !password) {
-      showAlert('registerAlert', '請填寫所有必填欄位', 'error');
-      return;
-    }
-    if (password.length < 8) {
-      showAlert('registerAlert', '密碼至少需要 8 個字元', 'error');
-      return;
-    }
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>送出申請中...';
-    hideAlert('registerAlert');
-
-    try {
-      // 建立帳號
-      const { data, error } = await sbclient.auth.signUp({ email, password });
-      if (error) throw error;
-
-      // 寫入申請資料
-      const { error: profileError } = await sbclient
-        .from('Prof')
-        .insert({
-          id: data.user.id,
-          role: role,
-          status: 'pending',
-          full_name: name,
-          phone: phone
-        });
-
-      if (profileError) throw profileError;
-
-      // 成功
-      document.getElementById('registerPanel').querySelector('.card').innerHTML = `
-        <div class="pending-box">
-          <div class="pending-icon">🎉</div>
-          <div class="pending-title">申請已成功送出！</div>
-          <div class="pending-desc">
-            感謝您的申請，我們將在 <strong>1-2個工作日</strong>內完成審核。<br>
-            審核結果將通知您，請留意您的 Email。<br><br>
-            如有疑問請透過 LINE 聯繫我們。
-          </div>
-        </div>
-        <a href="index.html" style="display:block;text-align:center;color:var(--orange);font-size:14px;text-decoration:none;font-weight:500;">← 返回首頁</a>
-      `;
-
-    } catch (err) {
-      let msg = '申請失敗，請稍後再試';
-      if (err.message?.includes('already registered')) msg = '此 Email 已經註冊過，請直接登入';
-      if (err.message?.includes('invalid email')) msg = '請輸入正確的電子信箱格式';
-      showAlert('registerAlert', msg, 'error');
-      btn.disabled = false;
-      btn.textContent = '送出申請';
-    }
-  }
-
-  // Enter 鍵觸發登入
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const loginActive = document.getElementById('loginPanel').classList.contains('active');
-      if (loginActive) handleLogin();
-    }
   });
+});
 
-  // 檢查是否已登入
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    if (session) {
-      const { data: profile } = await sbclient
-        .from('Prof')
-        .select('role, status')
-        .eq('id', session.user.id)
-        .single();
+function switchTab(tab) {
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+  document.getElementById('loginPanel').classList.toggle('active', tab === 'login');
+  document.getElementById('registerPanel').classList.toggle('active', tab === 'register');
+}
 
-      if (profile?.status === 'approved') {
-        window.location.href = profile.role === 'vip' ? 'vip.html' : 'partner.html';
-      }
-    }
+function showAlert(id, msg, type) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'alert ' + type + ' show';
+}
+
+function hideAlert(id) { document.getElementById(id).className = 'alert'; }
+
+function handleLogin() {
+  if (!sb) { alert('系統初始化中，請稍後再試'); return; }
+  var email = document.getElementById('loginEmail').value.trim();
+  var password = document.getElementById('loginPassword').value;
+  var btn = document.getElementById('loginBtn');
+  if (!email || !password) { showAlert('loginAlert', '請填寫電子信箱和密碼', 'error'); return; }
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>登入中...';
+  hideAlert('loginAlert');
+  sb.auth.signInWithPassword({ email: email, password: password }).then(function(res) {
+    if (res.error) throw res.error;
+    return sb.from('Prof').select('*').eq('id', res.data.user.id).single();
+  }).then(function(res) {
+    if (res.error) throw res.error;
+    var p = res.data;
+    if (!p) { showAlert('loginAlert', '找不到您的會員資料，請聯繫管理員', 'error'); btn.disabled = false; btn.textContent = '登入'; return; }
+    if (p.status === 'pending') { showAlert('loginAlert', '⏳ 您的申請正在審核中，請耐心等候', 'error'); btn.disabled = false; btn.textContent = '登入'; return; }
+    if (p.status === 'rejected') { showAlert('loginAlert', '❌ 您的申請未通過審核，請聯繫我們', 'error'); btn.disabled = false; btn.textContent = '登入'; return; }
+    showAlert('loginAlert', '✅ 登入成功！正在跳轉...', 'success');
+    setTimeout(function() { window.location.href = p.role === 'vip' ? 'vip.html' : 'partner.html'; }, 1000);
+  }).catch(function(err) {
+    var msg = '登入失敗，請確認帳號密碼是否正確';
+    if (err.message && err.message.indexOf('Invalid') !== -1) msg = '電子信箱或密碼錯誤，請重試';
+    showAlert('loginAlert', msg, 'error');
+    btn.disabled = false;
+    btn.textContent = '登入';
   });
+}
+
+function handleRegister() {
+  if (!sb) { alert('系統初始化中，請稍後再試'); return; }
+  var role = document.getElementById('registerRole').value;
+  var name = document.getElementById('registerName').value.trim();
+  var email = document.getElementById('registerEmail').value.trim();
+  var phone = document.getElementById('registerPhone').value.trim();
+  var password = document.getElementById('registerPassword').value;
+  var btn = document.getElementById('registerBtn');
+  if (!role || !name || !email || !password) { showAlert('registerAlert', '請填寫所有必填欄位', 'error'); return; }
+  if (password.length < 8) { showAlert('registerAlert', '密碼至少需要 8 個字元', 'error'); return; }
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>送出申請中...';
+  hideAlert('registerAlert');
+  sb.auth.signUp({ email: email, password: password }).then(function(res) {
+    if (res.error) throw res.error;
+    return sb.from('Prof').insert({ id: res.data.user.id, role: role, status: 'pending', full_name: name, phone: phone });
+  }).then(function(res) {
+    if (res.error) throw res.error;
+    document.getElementById('registerCard').innerHTML = '<div class="success-box"><div class="icon">🎉</div><h3>申請已成功送出！</h3><p>感謝您的申請，我們將在 <strong>1-2個工作日</strong>內完成審核。<br>審核結果將通知您，請留意您的 Email。<br><br>如有疑問請透過 LINE 聯繫我們。</p></div>';
+  }).catch(function(err) {
+    var msg = '申請失敗，請稍後再試';
+    if (err.message && err.message.indexOf('already registered') !== -1) msg = '此 Email 已經註冊過，請直接登入';
+    showAlert('registerAlert', msg, 'error');
+    btn.disabled = false;
+    btn.textContent = '送出申請';
+  });
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('loginPanel').classList.contains('active')) handleLogin();
+});
 </script>
 </body>
 </html>
